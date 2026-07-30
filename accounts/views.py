@@ -5,15 +5,15 @@ from .forms import Registerform
 
 # Create your views here.
 def register(request):
+    if request.user.is_authenticated:
+        return redirect('dashboard')
     if request.method == "POST":
         form = Registerform(request.POST)
 
         if form.is_valid():
-            print("✅ Form Valid")
             user = form.save(commit=False)
             user.set_password(form.cleaned_data['password'])
             user.save()
-            print("✅ User Saved")
             messages.success(request,"Registration successful.")
             return redirect("login")
     else:
@@ -22,6 +22,8 @@ def register(request):
     return render(request,"accounts/register.html",{"form":form})
 
 def login_view(request):
+    if request.user.is_authenticated:
+        return redirect('dashboard')
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']

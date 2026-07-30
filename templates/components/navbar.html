@@ -1,24 +1,142 @@
 <nav class="bg-slate-900 text-white shadow-lg">
-  <div class="max-w-7xl mx-auto px-6">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <div class="flex justify-between items-center h-16">
-      <a href="#" class="text-2xl font-bold text-cyan-400"> EMS </a>
 
-      <div class="flex items-center gap-6">
-        <a href="{% url 'dashboard' %}" class="hover:text-cyan-400"
-          >Dashboard</a
+      <!-- Logo -->
+      <a
+        href="{% url 'dashboard' %}"
+        class="text-2xl font-bold text-cyan-400"
+      >
+        EMS
+      </a>
+
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex items-center gap-6">
+
+        <a
+          href="{% url 'dashboard' %}"
+          class="hover:text-cyan-400 transition"
         >
-        <a href="{% url 'employee_list' %}" class="hover:text-cyan-400"
-          >Employees</a
+          Dashboard
+        </a>
+
+        <a
+          href="{% url 'employee_list' %}"
+          class="hover:text-cyan-400 transition"
         >
-        <a href="{% url 'profile' %}" class="hover:text-cyan-400"> Profile </a>
+          Employees
+        </a>
+
+        <a
+          href="{% url 'profile' %}"
+          class="hover:text-cyan-400 transition"
+        >
+          Profile
+        </a>
 
         <a
           href="{% url 'logout' %}"
-          class="bg-red-500 px-4 py-2 rounded-lg hover:bg-red-600"
+          class="bg-red-500 px-4 py-2 rounded-lg hover:bg-red-600 transition"
         >
           Logout
         </a>
+
       </div>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-button"
+        type="button"
+        class="md:hidden p-2 rounded-lg hover:bg-slate-800 focus:outline-none"
+        aria-label="Open menu"
+      >
+        <!-- Hamburger Icon -->
+        <svg
+          id="menu-open-icon"
+          class="w-7 h-7"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+
+        <!-- Close Icon -->
+        <svg
+          id="menu-close-icon"
+          class="hidden w-7 h-7"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
+
     </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div
+      id="mobile-menu"
+      class="hidden md:hidden border-t border-slate-700"
+    >
+
+      <div class="py-3 space-y-1">
+
+        <a
+          href="{% url 'dashboard' %}"
+          class="block px-4 py-3 rounded-lg hover:bg-slate-800 hover:text-cyan-400 transition"
+        >
+          Dashboard
+        </a>
+
+        <a
+          href="{% url 'employee_list' %}"
+          class="block px-4 py-3 rounded-lg hover:bg-slate-800 hover:text-cyan-400 transition"
+        >
+          Employees
+        </a>
+
+        <a
+          href="{% url 'profile' %}"
+          class="block px-4 py-3 rounded-lg hover:bg-slate-800 hover:text-cyan-400 transition"
+        >
+          Profile
+        </a>
+
+        <a
+          href="{% url 'logout' %}"
+          class="block mx-4 mt-2 text-center bg-red-500 hover:bg-red-600 px-4 py-3 rounded-lg transition"
+        >
+          Logout
+        </a>
+
+      </div>
+
+    </div>
+
   </div>
 </nav>
+
+<script>
+  const menuButton = document.getElementById("mobile-menu-button");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const openIcon = document.getElementById("menu-open-icon");
+  const closeIcon = document.getElementById("menu-close-icon");
+
+  menuButton.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+    openIcon.classList.toggle("hidden");
+    closeIcon.classList.toggle("hidden");
+  });
+</script>
