@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Employee{% endblock %}
+
+{% block content %}
+
+<div class="max-w-4xl mx-auto mt-10">
+
+    <div class="bg-white rounded-xl shadow-lg p-8">
+
+        <h2 class="text-3xl font-bold text-slate-800 mb-8">
+            Edit Employee
+        </h2>
+
+        <form method="POST" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            <div class="grid md:grid-cols-2 gap-6">
+
+                <div>
+                    <label class="block mb-2 font-medium">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        name="name"
+                        value="{{ employee.name }}"
+                        class="w-full border rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
+                        required>
+                </div>
+
+                <div>
+                    <label class="block mb-2 font-medium">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        name="email"
+                        value="{{ employee.email }}"
+                        class="w-full border rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
+                        required>
+                </div>
+
+                <div>
+                    <label class="block mb-2 font-medium">
+                        Phone
+                    </label>
+
+                    <input
+                        type="text"
+                        name="phone"
+                        value="{{ employee.phone }}"
+                        class="w-full border rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
+                        required>
+                </div>
+
+                <div>
+                    <label class="block mb-2 font-medium">
+                        Department
+                    </label>
+
+                    <input
+                        type="text"
+                        name="department"
+                        value="{{ employee.department }}"
+                        class="w-full border rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
+                        required>
+                </div>
+
+                <div>
+                    <label class="block mb-2 font-medium">
+                        Salary
+                    </label>
+
+                    <input
+                        type="number"
+                        step="0.01"
+                        name="salary"
+                        value="{{ employee.salary }}"
+                        class="w-full border rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
+                        required>
+                </div>
+
+                <div>
+                    <label class="block mb-2 font-medium">
+                        Joining Date
+                    </label>
+
+                    <input
+                        type="date"
+                        name="joining_date"
+                        value="{{ employee.joining_date|date:'Y-m-d' }}"
+                        class="w-full border rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
+                        required>
+                </div>
+
+                <div class="md:col-span-2">
+
+                    <label class="block mb-2 font-medium">
+                        Employee Photo
+                    </label>
+
+                    {% if employee.image %}
+                        <img src="{{ employee.image.url }}"
+                             class="w-24 h-24 rounded-full object-cover mb-4">
+                    {% endif %}
+
+                    <input
+                        type="file"
+                        name="image"
+                        class="w-full border rounded-lg px-4 py-3">
+
+                </div>
+
+            </div>
+
+            <div class="flex gap-4 mt-8">
+
+                <button
+                    type="submit"
+                    class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg">
+
+                    Update Employee
+
+                </button>
+
+                <a href="{% url 'employee_list' %}"
+                   class="bg-gray-500 hover:bg-gray-600 text-white px-8 py-3 rounded-lg">
+
+                    Cancel
+
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

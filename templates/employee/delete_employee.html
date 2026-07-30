@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Delete Employee{% endblock %}
+
+{% block content %}
+
+<div class="max-w-lg mx-auto mt-20">
+
+    <div class="bg-white shadow-lg rounded-xl p-8">
+
+        <h2 class="text-2xl font-bold text-red-600 mb-4">
+            Delete Employee
+        </h2>
+
+        <p class="mb-6 text-gray-700">
+            Are you sure you want to delete
+            <strong>{{ employee.name }}</strong>?
+        </p>
+
+        {% if employee.image %}
+            <img src="{{ employee.image.url }}"
+                 class="w-24 h-24 rounded-full mb-6 object-cover">
+        {% endif %}
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <div class="flex gap-4">
+
+                <button
+                    type="submit"
+                    class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg">
+
+                    Delete
+
+                </button>
+
+                <a href="{% url 'employee_list' %}"
+                   class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg">
+
+                    Cancel
+
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

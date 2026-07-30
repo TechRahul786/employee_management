@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="max-w-7xl mx-auto p-8">
+
+    <h1 class="text-4xl font-bold mb-8">
+        Dashboard
+    </h1>
+
+    <div class="grid md:grid-cols-4 gap-6">
+
+        <div class="bg-white rounded-xl shadow-lg p-6">
+            <h2 class="text-gray-500">Employees</h2>
+            <p class="text-4xl font-bold mt-2">{{employee_count}}</p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-lg p-6">
+            <h2 class="text-gray-500">Departments</h2>
+            <p class="text-4xl font-bold mt-2">5</p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-lg p-6">
+            <h2 class="text-gray-500">Users</h2>
+            <p class="text-4xl font-bold mt-2">{{user_count}}</p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-lg p-6">
+            <h2 class="text-gray-500">Today's Joins</h2>
+            <p class="text-4xl font-bold mt-2">2</p>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

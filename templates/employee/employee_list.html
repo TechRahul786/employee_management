@@ -1,0 +1,120 @@
+{% extends "base.html" %} 
+{% block title %}Employees{% endblock %} 
+{% block content %}
+
+<div class="max-w-7xl mx-auto p-8">
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-3xl font-bold">Employees</h1>
+
+    <form method="GET" class="mb-6 w-1/2">
+      <div class="flex gap-3">
+        <input
+          type="text"
+          name="search"
+          value="{{ request.GET.search }}"
+          placeholder="Search by name, email or department..."
+          class="w-full border rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
+        />
+
+        <button
+          type="submit"
+          class="bg-blue-600 hover:bg-blue-700 text-white px-6 rounded-lg"
+        >
+          Search
+        </button>
+      </div>
+    </form>
+
+   
+      <a href="{% url 'add_employee' %}" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg whitespace-nowrap"> + Add Employee </a>
+   
+  </div>
+
+  <table
+    class="w-full table-auto border-collapse bg-white shadow rounded-lg overflow-hidden"
+  >
+    <thead class="bg-slate-900 text-white">
+      <tr>
+        <th class="p-3">Photo</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Department</th>
+        <th>Salary</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for employee in page_obj %}
+      <tr class="flex-col border-b">
+        <td class="flex p-4 justify-items-center justify-center">
+          <img
+            src="{{ employee.image.url }}"
+            class="w-14 h-14 rounded-full object-cover"
+          />
+        </td>
+
+        <td class="p-4 text-center">{{ employee.name }}</td>
+        <td class="p-4 text-center">{{ employee.email }}</td>
+        <td class="p-4 text-center">{{ employee.department }}</td>
+        <td class="p-4 text-center">{{ employee.salary }}</td>
+
+        <td class="p-4 text-center">
+          <a
+            href="{% url 'edit_employee' employee.id %}"
+            class="text-blue-600 hover:underline cursor-pointer"
+            >Edit</a
+          >
+          |
+          <a
+            href="{% url 'delete_employee' employee.id %}"
+            class="text-red-600 hover:underline cursor-pointer"
+          >
+            Delete
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="flex justify-center mt-8">
+    <nav class="flex items-center gap-2">
+      {% if page_obj.has_previous %}
+
+      <a href="?page=1" class="px-4 py-2 bg-gray-200 rounded-lg"> First </a>
+
+      <a
+        href="?page={{ page_obj.previous_page_number }}"
+        class="px-4 py-2 bg-blue-500 text-white rounded-lg"
+      >
+        Previous
+      </a>
+
+      {% endif %}
+
+      <span class="px-4 py-2 bg-slate-900 text-white rounded-lg">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+      </span>
+
+      {% if page_obj.has_next %}
+
+      <a
+        href="?page={{ page_obj.next_page_number }}"
+        class="px-4 py-2 bg-blue-500 text-white rounded-lg"
+      >
+        Next
+      </a>
+
+      <a
+        href="?page={{ page_obj.paginator.num_pages }}"
+        class="px-4 py-2 bg-gray-200 rounded-lg"
+      >
+        Last
+      </a>
+
+      {% endif %}
+    </nav>
+  </div>
+</div>
+
+{% endblock %}

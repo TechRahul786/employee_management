@@ -1,0 +1,110 @@
+{% extends "base.html" %} 
+{% block title %}Register{% endblock %} 
+{% block content %}
+
+<div
+  class="min-h-screen flex items-center justify-center bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900"
+>
+  <div class="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8">
+    <div class="text-center mb-8">
+      <h1 class="text-3xl font-bold text-slate-800">Employee Management</h1>
+
+      <p class="text-gray-500 mt-2">Sign in to your account</p>
+    </div>
+    <div>
+        {% if form.errors %}
+    <div class="mb-4 bg-red-100 text-red-700 p-3 rounded">
+      {{ form.errors }}
+    </div>
+    {% endif %}
+    </div>
+    
+
+    <form method="POST">
+      {% csrf_token %}
+
+      <div class="mb-4">
+        <label class="block mb-2 font-medium"> First Name </label>
+
+        <input
+          type="text"
+          name="firs_tname"
+          class="w-full border rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
+          placeholder="First Name"
+        />
+      </div>
+
+      <div class="mb-4">
+        <label class="block mb-2 font-medium"> Last Name </label>
+
+        <input
+          type="text"
+          name="last_name"
+          class="w-full border rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
+          placeholder="Last Name"
+        />
+      </div>
+
+      <div class="mb-4">
+        <label class="block mb-2 font-medium"> Username </label>
+
+        <input
+          type="text"
+          name="username"
+          class="w-full border rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
+          placeholder="Enter username"
+        />
+      </div>
+
+      <div class="mb-4">
+        <label class="block mb-2 font-medium"> Email </label>
+
+        <input
+          type="text"
+          name="email"
+          class="w-full border rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
+          placeholder="Enter Email"
+        />
+      </div>
+
+      <div class="mb-6">
+        <label class="block mb-2 font-medium"> Password </label>
+
+        <input
+          type="password"
+          name="password"
+          class="w-full border rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
+          placeholder="Enter password"
+        />
+      </div>
+
+      <div class="mb-6">
+        <label class="block mb-2 font-medium"> Confirm Password </label>
+
+        <input
+          type="password"
+          name="confirm_password"
+          class="w-full border rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
+          placeholder="Enter password"
+        />
+      </div>
+
+      <button
+        type="submit"
+        class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition"
+      >
+        Register
+      </button>
+    </form>
+
+    <p class="text-center mt-6">
+      Don't have an account?
+
+      <a href="{% url 'login' %}" class="text-blue-600 font-semibold">
+        Login
+      </a>
+    </p>
+  </div>
+</div>
+
+{% endblock %}
